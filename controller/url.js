@@ -13,3 +13,12 @@ exports.generateNewShortUrl = async (req, res) => {
   })
   return res.json({ id: shortId })
 }
+
+exports.getAnalytics = async (req, res) => {
+  const shortId = req.params.shortId
+  const result = await URL.find({ shortId })
+  return res.status(200).json({
+    totalClicks: result[0].visitHistory.length,
+    analytics: result[0].visitHistory,
+  })
+}
