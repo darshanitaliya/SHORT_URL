@@ -11,7 +11,7 @@ exports.generateNewShortUrl = async (req, res) => {
     redirectUrl: body.url,
     visitHistory: [],
   })
-  return res.json({ id: shortId })
+  return res.render('home', { id: shortId })
 }
 
 exports.getAnalytics = async (req, res) => {
