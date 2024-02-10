@@ -12,3 +12,12 @@ exports.restrictToLoggedinUserOnly = async (req, res, next) => {
   req.user = user
   next()
 }
+
+exports.checkAuth = async (req, res, next) => {
+  const userUid = req.cookies?.uid
+
+  const user = getUser(userUid)
+
+  req.user = user
+  next()
+}

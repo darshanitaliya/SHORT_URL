@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const urlRoute = require('./routes/url')
 const staticRoute = require('./routes/staticRouter')
 const userRoute = require('./routes/user')
-const { restrictToLoggedinUserOnly } = require('./middlewares/auth')
+const { restrictToLoggedinUserOnly, checkAuth } = require('./middlewares/auth')
 
 const app = express()
 const PORT = 8000
@@ -23,7 +23,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/', staticRoute)
+app.use('/', checkAuth, staticRoute)
 app.use('/user', userRoute)
 app.use('/url', restrictToLoggedinUserOnly, urlRoute)
 
