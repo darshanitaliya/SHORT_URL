@@ -22,8 +22,14 @@ exports.handleUserLogin = async (req, res) => {
       error: 'Invalid Username or Password',
     })
   }
-  const sessionId = uuidv4()
-  setUser(sessionId, user)
-  res.cookie('uid', sessionId)
+
+  // For StateFull auth
+  // const sessionId = uuidv4()
+  // setUser(sessionId, user)
+
+  // For JWT
+  const token = setUser(user)
+
+  res.cookie('uid', token)
   return res.redirect('/')
 }
